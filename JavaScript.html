@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban City Living - Responsive Design</title>
+    <style>
+        /* Base Styles (Desktop and Larger Screens) */
+        body {
+            font-family: Constantia, Georgia, serif;
+            max-width: 1024px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            box-sizing: border-box;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333333;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Neon Glow Heading */
+        h1 {
+            text-align: center;
+            font-size: 42pt;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-shadow:
+                0 0 6px #E033FF,
+                0 0 12px #E033FF,
+                0 0 24px #E033FF;
+        }
+
+        h2 {
+            color: #1a252f;
+            margin-top: 30px;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555555;
+            margin-bottom: 25px;
+        }
+
+        /* Story Image Styling */
+        .story-image {
+            display: block;
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border: 2px solid #E033FF;
+            border-radius: 6px;
+            margin: 25px auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Interactive Controls Toolbar */
+        .js-controls {
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .js-controls button {
+            padding: 10px 18px;
+            font-family: Constantia, Georgia, serif;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #2c3e50;
+            color: #ffffff;
+            border: 1px solid #E033FF;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .js-controls button:hover {
+            background-color: #E033FF;
+            color: #000000;
+            box-shadow: 0 0 10px #E033FF;
+        }
+
+        .content-section {
+            border-left: 3px solid #E033FF;
+            padding-left: 18px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Ranked Boxes Layout (Top 3: #1 on top, #2 & #3 on bottom) */
+        .ranking-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .rank-card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-left: 5px solid #E033FF;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .rank-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .rank-card.top-box {
+            background: linear-gradient(135deg, #ffffff 0px, #fdf8ff 100%);
+            border-top: 2px solid #E033FF;
+        }
+
+        .bottom-boxes-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .bottom-boxes-row .rank-card {
+            flex: 1;
+        }
+
+        .rank-number {
+            display: inline-block;
+            background-color: #E033FF;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .rank-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        /* High Contrast Mode Overrides */
+        body.high-contrast {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast h1 {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast h2, body.high-contrast h3 {
+            color: #ffff00 !important;
+        }
+
+        body.high-contrast .subtitle {
+            color: #cccccc !important;
+        }
+
+        body.high-contrast a {
+            color: #ffff00 !important;
+            text-shadow: 0 0 5px #E033FF;
+        }
+
+        body.high-contrast button {
+            background-color: #ffff00;
+            color: #000000;
+            border-color: #ffffff;
+            font-weight: bold;
+        }
+
+        body.high-contrast .story-image {
+            border-color: #ffff00;
+        }
+
+        body.high-contrast .rank-card {
+            background-color: #1a1a1a !important;
+            border-color: #444 !important;
+            border-left-color: #ffff00 !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .rank-card h3 {
+            color: #ffff00 !important;
+        }
+
+        body.high-contrast .rank-number {
+            background-color: #ffff00;
+            color: #000000;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .bottom-boxes-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Neon Glow Heading -->
+    <h1>Urban City Living</h1>
+    <p class="subtitle">Exploring modern architectural aesthetics, cityscapes, and responsive design.</p>
+
+    <!-- Interactive Controls Toolbar -->
+    <div class="js-controls">
+        <button id="contrast-btn" onclick="toggleContrast()">High Contrast</button>
+        <button id="font-btn" onclick="increaseFontSize()">Increase Text Size</button>
+        <button id="print-btn" onclick="printPage()">Print Page</button>
+    </div>
+
+    <div class="content-section">
+        <h2>Modern Metropolitan Spaces</h2>
+        <p>Use the interactive controls above to switch into high-contrast mode for better legibility, adjust the base typography sizing, or print this layout directly from your browser.</p>
+    </div>
+
+    <!-- Image Placed Underneath the Text -->
+    <img src="IMG_0124.jpeg" alt="Moon and clouds" class="story-image">
+
+    <!-- Ranked Boxes: Top 3 Best Parts of Visiting Cities (#1 on top, #2 and #3 on bottom) -->
+    <div class="content-section">
+        <h2>Top 3 Best Parts of Visiting Cities</h2>
+        
+        <div class="ranking-container">
+            <!-- Box 1 (Top) -->
+            <div class="rank-card top-box">
+                <span class="rank-number">Rank #1</span>
+                <h3>Architectural Diversity & Historic Landmarks</h3>
+                <p>Standing between centuries-old cathedrals and towering modern glass skyscrapers captures the true evolution of human culture and design.</p>
+            </div>
+
+            <!-- Bottom Row for Box 2 and Box 3 -->
+            <div class="bottom-boxes-row">
+                <div class="rank-card">
+                    <span class="rank-number">Rank #2</span>
+                    <h3>Local Food Culture & Street Markets</h3>
+                    <p>Tasting authentic regional dishes and exploring bustling local food districts gives you an immediate window into the community's heart and soul.</p>
+                </div>
+                <div class="rank-card">
+                    <span class="rank-number">Rank #3</span>
+                    <h3>Vibrant Street Life & Public Spaces</h3>
+                    <p>People-watching in lively plazas, parks, and busy pedestrian avenues reveals the pulse, energy, and daily rhythm of urban residents.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // 1. High Contrast Mode Toggle
+        function toggleContrast() {
+            document.body.classList.toggle("high-contrast");
+
+            const contrastBtn = document.getElementById("contrast-btn");
+            if (document.body.classList.contains("high-contrast")) {
+                contrastBtn.textContent = "Standard Contrast";
+            } else {
+                contrastBtn.textContent = "High Contrast";
+            }
+        }
+
+        // 2. Font Size Increaser (Accessibility)
+        let currentFontSize = 16; // Matches your 16px base body font-size
+
+        function increaseFontSize() {
+            currentFontSize += 2; // Steps up by 2px per click
+
+            // Resets back to 16px after hitting max limit (22px)
+            if (currentFontSize > 22) {
+                currentFontSize = 16;
+            }
+
+            document.body.style.fontSize = currentFontSize + "px";
+
+            const fontBtn = document.getElementById("font-btn");
+            if (currentFontSize === 16) {
+                fontBtn.textContent = "Increase Text Size";
+            } else {
+                fontBtn.textContent = "Text Size: " + currentFontSize + "px";
+            }
+        }
+
+        // 3. Print Page Function
+        function printPage() {
+            window.print();
+        }
+    </script>
+
+</body>
+</html>
